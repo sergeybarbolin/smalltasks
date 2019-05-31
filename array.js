@@ -201,3 +201,238 @@ const removeClass = (obj, cls) => {
 
 removeClass(obj1, 'menu');
 // console.log(obj1);
+
+
+
+// Создайте функцию filterRangeInPlace(arr, a, b), которая получает массив с числами arr и удаляет из него все числа вне диапазона a..b. То есть, проверка имеет вид a ≤ arr[i] ≤ b. Функция должна менять сам массив и ничего не возвращать.
+
+const filterRangeInPlace = (arr, a, b) => {
+
+	let result = [];
+
+	for (let i = 0; i < arr.length; i++) {
+		if (!(arr[i] >= a && arr[i] <= b)) {
+			arr.splice(i, 1);
+		}
+	}
+
+
+}
+
+const arr3 = [5, 3, 8, 1];
+
+filterRangeInPlace(arr3, 1, 4);
+
+// console.log(arr3);
+
+// Как отсортировать массив чисел в обратном порядке?
+
+let arr4 = [5, 2, 1, -10, 8];
+
+arr4 = arr4.sort((a,b) => b-a);
+
+// console.log(arr4);
+
+
+// Есть массив строк arr. Создайте массив arrSorted – из тех же элементов, но отсортированный.
+
+const arr5 = ["HTML", "JavaScript", "CSS"];
+
+let arr6 = arr5.slice().sort();
+
+// for (let i = 0; i < arr5.length; i++) {
+// 	arr6[i] = arr5[i];
+// }
+
+// arr6.sort();
+
+// console.log(arr6);
+
+
+// Используйте функцию sort для того, чтобы «перетрясти» элементы массива в случайном порядке.
+
+
+let arr7 = [1, 2, 3, 4, 5];
+
+arr7.sort((a,b) => rand(-1, 2));
+
+// console.log(arr7);
+
+
+
+// Напишите код, который отсортирует массив объектов people по полю age.
+
+const vasya = { name: "Вася", age: 23 };
+const masha = { name: "Маша", age: 18 };
+const vovochka = { name: "Вовочка", age: 6 };
+
+const people = [ vasya , masha , vovochka ];
+
+people.sort((a, b) => a.age - b.age);
+
+// for (let i = 0; i < people.length; i++) {
+// 	console.log(people[i].name);
+// }
+
+
+// Односвязный список – это структура данных, которая состоит из элементов, каждый из которых хранит ссылку на следующий. Последний элемент может не иметь ссылки, либо она равна null.
+// Напишите функцию printList(list), которая выводит элементы списка по очереди, при помощи цикла.
+// Напишите функцию printList(list) при помощи рекурсии.
+// Напишите функцию printReverseList(list), которая выводит элементы списка в обратном порядке, при помощи рекурсии. Для списка выше она должна выводить 4,3,2,1
+// Сделайте вариант printReverseList(list), использующий не рекурсию, а цикл.
+const list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
+};
+
+
+const printList = list => {
+	let tmp = list; 
+
+	while (tmp) {
+		console.log(tmp.value);
+		tmp = tmp.next;
+	}
+}
+
+// printList(list);
+
+const printList1 = list => {
+	console.log(list.value);
+	if (list.next) {
+		printList1(list.next);
+	}
+}
+
+// printList1(list);
+
+const printReverseList = list => {
+	if (list.next) {
+		printReverseList(list.next);
+	}
+	console.log(list.value);
+}
+
+// printReverseList(list);
+
+const printReverseList1 = list => {
+	let tmp = list;
+	let arr = [];
+
+	while (tmp) {
+		arr.push(tmp.value);
+		tmp = tmp.next;
+	}
+
+	for (let i = arr.length -1; i >= 0; i--) {
+		console.log(arr[i]);
+	}
+
+}
+
+// printReverseList1(list);
+
+
+
+// Отфильтровать анаграммы
+
+const arr8 = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+
+const aclean = arr => {
+	let obj = {};
+	console.log(arr);
+	for (let i = 0; i < arr.length; i++) {
+		let sorted = arr[i].toLowerCase().split('').sort().join('');
+		obj[sorted] = arr[i];
+	}
+
+	let result = [];
+
+	for (let key in obj) {
+		result.push(obj[key]);
+	}
+
+	return result;
+}
+
+// console.log(aclean(arr8));
+
+
+// Напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные элементы arr.
+
+const strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", "8-()"
+];
+//es5
+// function unique(arr) {
+//   var result = [];
+
+//   nextInput:
+//     for (var i = 0; i < arr.length; i++) {
+//       var str = arr[i]; // для каждого элемента
+//       for (var j = 0; j < result.length; j++) { // ищем, был ли он уже?
+//         if (result[j] == str) continue nextInput; // если да, то следующий
+//       }
+//       result.push(str);
+//     }
+
+//   return result;
+// }
+//es6
+const unique = arr => [...new Set(arr)];
+
+// console.log(unique(strings));
+
+
+
+const arr9 = ["Яблоко", "Апельсин", "Груша"];
+
+arr9.forEach((item, i, arr) => {
+	// console.log(i + ': ' + item + '. Массив: ' + arr);
+});
+
+
+const arr10 = [1, -1, 2, -2, 3];
+
+const positiveArr = arr10.filter(number => number > 0);
+
+// console.log(positiveArr);
+
+const names1 = ['HTML', 'CSS', 'JavaScript'];
+
+const nameLengths = names1.map(name => name + 1);
+
+// console.log(nameLengths);
+
+const arr11 = [1, -1, 2, -2, 3];
+
+// console.log(arr11.every((number) => number > 0));
+// console.log(arr11.some((number) => number > 0));
+
+const arr12 = [1, 2, 3, 4, 5];
+const sumArr = arr12.reduce((sum, current) => sum + current);
+
+// console.log(sumArr);
+
+const upperProps = obj => {
+	result = [];
+
+	for (let key in obj) {
+		result.push(obj[key].toUpperCase())
+	}
+
+	return result;
+
+};
+
+
+console.log(upperProps({ name: 'Сергей', lastName: 'Петров' }));
